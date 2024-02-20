@@ -1,0 +1,29 @@
+// variables
+var nomineeList = getColumn("Grammy Winners", "Nominee");
+var categoryList = getColumn("Grammy Winners","Category");
+var yearList = getColumn("Grammy Winners","Year");
+
+//filtered variables
+var filteredNominee = [];
+
+//inputs
+onEvent("goButton", "click", function () {
+  filter(getNumber("yearDropdown") , getText("categoryDropdown"));
+  updateScreen();
+});
+
+//filters
+function filter (year , category) {
+filteredNominee = [];
+for(var i = 0;  i < nomineeList.length; i++) {
+  if((yearList[i] == year) &&(categoryList[i] == category)) {
+  appendItem(filteredNominee,nomineeList[i]);
+  }
+  }
+}
+
+//updateScreen function
+function updateScreen () {
+ setText("textBox", "Nominees: " + filteredNominee );
+}
+
